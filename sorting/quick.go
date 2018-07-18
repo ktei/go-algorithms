@@ -1,7 +1,7 @@
 package sorting
 
 func QuickSort(input []int, pivot int, start int, end int) []int {
-	if end-start <= 0 {
+	if end-start < 1 {
 		return input
 	}
 
@@ -12,20 +12,20 @@ func QuickSort(input []int, pivot int, start int, end int) []int {
 	i := start
 	j := end
 
-	// when i >= j, i is the partition index
 	for i < j {
 		// find the next right value that is < pivot
 		// and move it to the left
-		if input[j] < pivotValue {
-			input[i] = input[j]
-			// find the next left value that is >= pivot
-			// and move it to the right
-			for i < j && input[i] < pivotValue {
-				i++
-			}
-			input[j] = input[i]
+		for i < j && input[j] >= pivotValue {
+			j--
 		}
-		j--
+		input[i] = input[j]
+
+		// find the next left value that is >= pivot
+		// and move it to the right
+		for i < j && input[i] <= pivotValue {
+			i++
+		}
+		input[j] = input[i]
 	}
 
 	// set partition point
